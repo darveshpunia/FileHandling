@@ -1,6 +1,8 @@
 package com.example.darvesh.filehandling;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.name);
         tv = (TextView) findViewById(R.id.textView);
 
+        final SharedPreferences sharedPreferences = this.getSharedPreferences("com.example.darvesh.filehandling", Context.MODE_PRIVATE);
+
+        if(sharedPreferences.contains("roll_num")){
+            String rollNum = sharedPreferences.getString("roll_num", "");
+            if(!rollNum.equals("-1")) {
+                Intent i = new Intent(getApplicationContext(), Main2Activity.class);
+                i.putExtra("rollNum", rollNum);
+                startActivity(i);
+            }
+        }
+
         try{
 
             final SQLiteDatabase database = openOrCreateDatabase("students", MODE_PRIVATE, null);
@@ -61,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
                     if(exists==0){
                         database.execSQL("INSERT INTO `users` (name, roll_no, password) VALUES ('"+c+"', '"+a+"', '"+b+"')");
-                        Toast.makeText(getApplicationContext(), "Inserted", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), Main2Activity.class);
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(getApplicationContext(), "Roll Number Already Exists!!", Toast.LENGTH_SHORT).show();
                     }
@@ -92,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent i = new Intent(getApplicationContext(), Main2Activity.class);
                                 startActivity(i);
                                 exists = 1;
+                                sharedPreferences.edit().putString("roll_num", a).apply();
                                 break;
                             }
                         }while(crs.moveToNext());

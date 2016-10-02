@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:background="#000" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:background="#fff"
+        android:ems="10"
+        android:layout_margin="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:id="@+id/editText3" />
+
+    <Button
+        android:text="Log Out"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/log_out"
+        android:padding="23dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:padding="15dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Password"
+        android:ems="10"
+        android:id="@+id/editText5"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/editText3" />
+
+    <Button
+        android:text="Update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/update"
+        android:padding="23dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/editText5"
+        android:layout_marginTop="29dp" />
+
+    <Button
+        android:text="Delete Account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete"
+        android:padding="23dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_above="@+id/log_out"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
