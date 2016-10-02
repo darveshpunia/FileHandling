@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity {
 
     Button delete, update, logout;
+    EditText name, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class Main2Activity extends AppCompatActivity {
         delete = (Button) findViewById(R.id.delete);
         update = (Button) findViewById(R.id.update);
         logout = (Button) findViewById(R.id.log_out);
+        name = (EditText) findViewById(R.id.name_box);
+        pass = (EditText) findViewById(R.id.editText5);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -46,7 +51,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 try{
                     final SQLiteDatabase database = openOrCreateDatabase("students", MODE_PRIVATE, null);
-                    database.execSQL("DELETE from users where roll_no = '"+r+"'");
+                    database.execSQL("DELETE FROM users where roll_no = '"+r+"'");
                     sharedPreferences.edit().putString("roll_num", "-1").apply();
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
@@ -56,8 +61,24 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    final SQLiteDatabase database = openOrCreateDatabase("students", MODE_PRIVATE, null);
+                    String get_name = name.getText().toString(), get_pass = pass.getText().toString();
+                    if(!get_name.equals("")){
+                        database.execSQL("Update users SET name="+get_name+" where roll_no = '"+r+"'");
+                    }
+                    if(!get_pass.equals("")){
+                        database.execSQL("Update users SET password="+get_pass+" where roll_no = '"+r+"'");
+                    }
+                    //Toast.makeText(getApplicationContext(), get_name +":" + get_pass, Toast.LENGTH_SHORT).show();
+                }catch (Exception e){
 
-
+                }
+            }
+        });
     }
 
     public void onBackPressed() {
